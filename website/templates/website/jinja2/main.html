@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if search_results %}
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>URL</th>
+            <th>Price</th>
+            <th>Unit Price</th>
+            <th>Condition</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for search_result in search_results|sort(attribute='unit_price') %}
+        <tr>
+            <td><img src="{{ search_result.item.galleryURL }}"></td>
+            <td><a href="{{ search_result.item.url }}"><h3>{{ search_result.item.title }}</h3></a></td>
+            <td>{{ search_result.item.price }}</td>
+            <td>{{ search_result.unit_price }}</td>
+            <td>{{ search_result.item.condition }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Sample queries:</p>
+    {% for query_url in sample_queries %}
+    <a href="{{ query_url }}">{{ query_url }}</a>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
